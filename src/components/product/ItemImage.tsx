@@ -37,6 +37,7 @@ function Photo({ src, alt, sizes, priority, className }: { src: string; alt: str
       fill
       sizes={sizes}
       priority={priority}
+      unoptimized={src.startsWith("blob:")}
       onLoad={() => setLoaded(true)}
       onError={() => setFailed(true)}
       className={clsx(
@@ -99,8 +100,10 @@ export function ItemImage({
 }: Props) {
   const src = item.images[index];
   const next = item.images[index + 1];
-  const hasMain = hasImage(src);
-  const hasNext = hoverSwap && hasImage(next);
+  // blob: URLs are local previews from the listing form (never uploaded)
+  const usable = (p: string | undefined): p is string => Boolean(p) && (p!.startsWith("blob:") || hasImage(p));
+  const hasMain = usable(src);
+  const hasNext = hoverSwap && usable(next);
   // Without photos, the hover swap shows the tile's second face (subcategory · condition).
   const fallbackSwap = hoverSwap && !hasMain && !hasNext && Boolean(next) && !bare;
 

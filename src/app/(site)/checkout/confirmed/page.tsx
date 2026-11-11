@@ -1,7 +1,13 @@
-import { Stub } from "@/components/layout/Stub";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Confirmation } from "@/components/order/Confirmation";
 
-export const metadata = { title: "Confirmed" };
+export const metadata: Metadata = { title: "You've got dibs", robots: { index: false } };
 
-export default function Page() {
-  return <Stub title="You've got dibs." phase={3} />;
+export default function ConfirmedPage() {
+  return (
+    <Suspense fallback={<div className="h-[60svh] bg-lastlight" aria-busy="true" />}>
+      <Confirmation />
+    </Suspense>
+  );
 }

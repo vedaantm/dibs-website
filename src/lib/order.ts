@@ -117,3 +117,24 @@ export function buildOrder(input: {
     status: "confirmed",
   };
 }
+
+/** Earliest pickup and latest return across an order's lines (yyyy-MM-dd). */
+export function orderSpan(o: Pick<Order, "lines">): { start: string; returnBy: string } {
+  const starts = o.lines.map((l) => l.start).sort();
+  const ends = o.lines.map((l) => l.returnBy).sort();
+  return { start: starts[0], returnBy: ends[ends.length - 1] };
+}
+
+/** CONFIRMED before pickup, PICKED UP while out, RETURNED after the last return date. */
+export function orderStatus(o: Pick<Order, "lines">, todayISO: string): OrderStatus {
+  const { start, returnBy } = orderSpan(o);
+  if (todayISO < start) return "confirmed";
+  if (todayISO <= returnBy) return "picked-up";
+  return "returned";
+}
+
+export const STATUS_LABEL: Record<OrderStatus, string> = {
+  confirmed: "Confirmed",
+  "picked-up": "Picked up",
+  returned: "Returned",
+};

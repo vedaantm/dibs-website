@@ -115,3 +115,13 @@ describe("orders and totals", () => {
     expect(ids.size).toBeGreaterThan(45);
   });
 });
+
+describe("orderStatus", () => {
+  it("moves from confirmed to picked up to returned", async () => {
+    const { orderStatus } = await import("./order");
+    const o = { lines: [{ start: "2026-11-13", returnBy: "2026-11-15" }, { start: "2026-11-16", returnBy: "2026-11-24" }] } as never;
+    expect(orderStatus(o, "2026-11-12")).toBe("confirmed");
+    expect(orderStatus(o, "2026-11-20")).toBe("picked-up");
+    expect(orderStatus(o, "2026-11-25")).toBe("returned");
+  });
+});

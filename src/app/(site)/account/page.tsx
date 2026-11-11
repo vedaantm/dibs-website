@@ -1,7 +1,8 @@
-import { Stub } from "@/components/layout/Stub";
+import type { Metadata } from "next";
+import { Account } from "@/components/order/Account";
 
-export const metadata = { title: "My Dibs" };
+export const metadata: Metadata = { title: "My Dibs", robots: { index: false } };
 
-export default function Page() {
-  return <Stub title="My Dibs" phase={3} />;
+export default function AccountPage() {
+  return <Account />;
 }
