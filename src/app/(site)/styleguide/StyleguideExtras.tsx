@@ -3,6 +3,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Hairline } from "@/components/ui/Hairline";
 import { getItem } from "@/lib/catalog";
 import { hasImage } from "@/lib/images";
+import { PickerDemo } from "./PickerDemo";
 
 const EXAMPLES = ["campbell-biology-12e", "burton-ripcord-154", "canon-eos-r50-kit", "disco-sequin-jumpsuit"];
 
@@ -27,6 +28,17 @@ export function StyleguideExtras() {
               </figcaption>
             </figure>
           ))}
+        </div>
+      </section>
+      <Hairline />
+      <section className="py-12">
+        <Eyebrow className="mb-2">RentalDatePicker · live quote</Eyebrow>
+        <p className="mb-6 max-w-2xl text-stone-deep">
+          Blocked dates are struck through. Presets jump to the next free slot. Textbooks bill in whole weeks.
+        </p>
+        <div className="grid gap-12 lg:grid-cols-2">
+          <PickerDemo slug="burton-ripcord-154" />
+          <PickerDemo slug="campbell-biology-12e" />
         </div>
       </section>
     </>

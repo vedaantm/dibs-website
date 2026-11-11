@@ -225,7 +225,7 @@ const RAW: Raw[] = [
     spots: ["bobst", "kimmel", "palladium"],
     query: "biology textbook hardcover",
     listed: "2026-11-10",
-    blocked: ["2026-12-21", "2026-12-22", "2026-12-23"],
+    blocked: ["2026-11-12", "2026-11-13"],
     tags: ["biology", "bio", "textbook", "pre-med", "finals", "principles of biology"],
     reviews: [
       { author: "Rhea M.", rating: 5, date: "2026-05-18", text: "Exactly as pictured. Deposit back two days after I returned it." },
@@ -251,7 +251,7 @@ const RAW: Raw[] = [
     spots: ["tandon", "bobst"],
     query: "calculus textbook on desk",
     listed: "2026-11-08",
-    blocked: ["2026-12-14", "2026-12-15"],
+    blocked: ["2026-11-12", "2026-11-13", "2026-11-14"],
     tags: ["calculus", "calc", "math", "stewart", "textbook", "finals"],
     reviews: [
       { author: "Wes H.", rating: 4, date: "2026-03-30", text: "Cover is worn like the listing says. Inside is fine. Got me through the midterm." },
@@ -275,7 +275,7 @@ const RAW: Raw[] = [
     spots: ["bobst", "kimmel"],
     query: "economics textbook stack",
     listed: "2026-11-05",
-    blocked: ["2026-12-20", "2026-12-21"],
+    blocked: ["2026-11-12", "2026-11-13"],
     tags: ["economics", "econ", "macro", "micro", "mankiw", "textbook", "stern"],
     reviews: [
       { author: "Ari L.", rating: 5, date: "2026-09-15", text: "Looks new. Maya was early to the handoff." },
@@ -299,7 +299,7 @@ const RAW: Raw[] = [
     spots: ["kimmel", "bobst"],
     query: "organic chemistry book molecular model",
     listed: "2026-10-29",
-    blocked: ["2026-12-10", "2026-12-11", "2026-12-12"],
+    blocked: ["2026-11-13", "2026-11-14", "2026-11-15"],
     tags: ["organic chemistry", "orgo", "chemistry", "chem", "klein", "textbook", "pre-med", "finals"],
     reviews: [
       { author: "Hugo B.", rating: 5, date: "2026-02-03", text: "The highlighting is genuinely good. Model kit was a nice bonus." },
@@ -324,7 +324,7 @@ const RAW: Raw[] = [
     spots: ["kimmel", "lipton"],
     query: "psychology textbook",
     listed: "2026-10-24",
-    blocked: ["2026-12-16", "2026-12-17"],
+    blocked: ["2026-11-12", "2026-11-13"],
     tags: ["psychology", "psych", "intro", "textbook", "finals"],
     reviews: [],
   },
@@ -597,7 +597,7 @@ const RAW: Raw[] = [
     spots: ["tandon", "bobst", "kimmel"],
     query: "graphing calculator",
     listed: "2026-11-09",
-    blocked: ["2026-12-15", "2026-12-16"],
+    blocked: ["2026-11-12", "2026-11-13"],
     tags: ["calculator", "ti-84", "ti84", "graphing", "math", "stats", "finals"],
     reviews: [
       { author: "Zoe Q.", rating: 5, date: "2026-05-11", text: "Rented it for finals week only. $15 instead of $150." },
