@@ -1,7 +1,8 @@
-import { Stub } from "@/components/layout/Stub";
+import type { Metadata } from "next";
+import { BagPage } from "@/components/bag/BagPage";
 
-export const metadata = { title: "Bag" };
+export const metadata: Metadata = { title: "Bag" };
 
 export default function Page() {
-  return <Stub title="Bag" phase={3} />;
+  return <BagPage />;
 }
