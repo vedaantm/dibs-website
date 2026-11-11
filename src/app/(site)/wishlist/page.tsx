@@ -1,7 +1,14 @@
-import { Stub } from "@/components/layout/Stub";
+import type { Metadata } from "next";
+import { Container } from "@/components/ui/Container";
+import { WishlistGrid } from "./WishlistGrid";
 
-export const metadata = { title: "Wishlist" };
+export const metadata: Metadata = { title: "Wishlist" };
 
-export default function Page() {
-  return <Stub title="Wishlist" phase={2} />;
+export default function WishlistPage() {
+  return (
+    <Container className="pb-24 pt-10 md:pt-14">
+      <h1 className="section-title mb-6">Wishlist</h1>
+      <WishlistGrid />
+    </Container>
+  );
 }
