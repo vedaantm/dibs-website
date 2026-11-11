@@ -211,6 +211,11 @@ export function RentalDatePicker({ item, value, onChange, compact, hideQuote, cl
             showOutsideDays={false}
             fixedWeeks
             aria-labelledby={`${idPrefix}-help`}
+            labels={{
+              // "Sunday, November 1, 2026": contains the visible number, plus state
+              labelDayButton: (date, m) =>
+                `${format(date, "EEEE, MMMM d, yyyy")}${m.today ? ", today" : ""}${m.blocked ? ", booked" : ""}${m.selected ? ", selected" : ""}`,
+            }}
             className="dibs-cal"
             style={{ ["--cell" as string]: `${cell}px` }}
             components={{

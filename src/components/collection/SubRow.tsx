@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import type { Item } from "@/data/types";
 import type { GradientName } from "@/data/types";
-import { gradientClass, hasImage } from "@/lib/images";
+import { tileClass, hasImage } from "@/lib/images";
 
 export type RowEntry = { key: string; label: string; count: number; gradient: GradientName; items: Item[] };
 
@@ -37,7 +37,7 @@ export function SubRow({
                   {photo ? (
                     <Image src={photo} alt="" fill sizes="120px" className="object-contain p-[8%] mix-blend-multiply" />
                   ) : (
-                    <div aria-hidden className={clsx(gradientClass[e.gradient], "grain absolute inset-0")} />
+                    <div aria-hidden className={clsx(tileClass[e.gradient], "grain absolute inset-0")} />
                   )}
                 </div>
                 <span

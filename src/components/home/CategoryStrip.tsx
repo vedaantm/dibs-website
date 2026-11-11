@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { getByCategory, getCategories } from "@/lib/catalog";
-import { gradientClass, hasImage } from "@/lib/images";
+import { tileClass, hasImage } from "@/lib/images";
 
 /** Atticus-style subcategory row: 2:3 thumbs, label + count. Scrolls with snap on mobile. */
 export function CategoryStrip() {
@@ -30,7 +30,7 @@ export function CategoryStrip() {
                     ) : (
                       <div
                         aria-hidden
-                        className={clsx(gradientClass[c.gradient], "grain absolute inset-0 transition-transform duration-300 ease-house group-hover:scale-[1.02]")}
+                        className={clsx(tileClass[c.gradient], "grain absolute inset-0 transition-transform duration-300 ease-house group-hover:scale-[1.02]")}
                       />
                     )}
                   </div>

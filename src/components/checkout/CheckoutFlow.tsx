@@ -78,6 +78,7 @@ export function CheckoutFlow() {
 
   return (
     <Container className="pb-16">
+      <h1 className="sr-only">Checkout</h1>
       <div className="grid gap-0 lg:grid-cols-[minmax(0,58fr)_minmax(0,42fr)] lg:gap-12">
         <div className="order-2 min-w-0 lg:order-1">
           <StepShell n={1} title="Verify" state={state(1)} summary={`Verified — ${c.email.trim().toLowerCase()} · ${c.name}`} onEdit={() => c.goTo(1)}>

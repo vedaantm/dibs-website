@@ -20,7 +20,7 @@ export function StepShell({ n, title, state, summary, onEdit, children }: Props)
       className="border-b border-line py-6 md:py-8"
     >
       <div className="flex items-start gap-4 md:gap-6">
-        <span aria-hidden className={clsx("text-[40px] font-light leading-none tabular-nums md:text-[56px]", state === "locked" ? "text-line" : "text-stone")}>
+        <span aria-hidden className={clsx("text-[40px] font-light leading-none tabular-nums md:text-[56px]", "text-stone")}>
           {num}
         </span>
         <div className="min-w-0 flex-1 pt-1 md:pt-2">

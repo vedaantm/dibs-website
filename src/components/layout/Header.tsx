@@ -87,8 +87,9 @@ export function Header({ overHero = false }: { overHero?: boolean }) {
           />
         </div>
 
-        <Link href="/" aria-label="Dibs Student Rentals, home" className="inline-flex justify-center px-2">
+        <Link href="/" className="inline-flex justify-center px-2">
           <Wordmark tone={transparent ? "paper" : "ink"} size="md" />
+            <span className="sr-only">, home</span>
         </Link>
 
         <div className="flex items-center justify-end">

@@ -26,3 +26,6 @@ export const gradientIsDark: Record<GradientName, boolean> = {
   turf: true,
   chalk: false,
 };
+
+/** Gradient classes for image tiles: chalk sits on blush so it reads against the paper page. */
+export const tileClass: Record<GradientName, string> = { ...gradientClass, chalk: "tile-chalk" };

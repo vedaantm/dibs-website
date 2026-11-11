@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { CATEGORIES } from "@/data/categories";
 import type { Item } from "@/data/types";
-import { gradientClass, gradientIsDark, hasImage } from "@/lib/images";
+import { gradientIsDark, hasImage, tileClass } from "@/lib/images";
 
 type Props = {
   item: Pick<Item, "slug" | "name" | "brand" | "categorySlug" | "subcategory" | "images" | "condition">;
@@ -69,17 +69,17 @@ export function FallbackTile({
       role="img"
       aria-label={altFor(item, index)}
       className={clsx(
-        gradientClass[g],
         "grain absolute inset-0 flex flex-col justify-end overflow-hidden",
+        tileClass[g],
         dark ? "text-paper" : "text-ink",
         bare ? "p-2" : "p-[8%]",
         className,
       )}
     >
       {!bare && (
-        <div className="relative z-[2] flex flex-col gap-1.5">
-          <span className="eyebrow opacity-80">{index > 0 ? `${item.subcategory} · ${item.condition}` : item.brand}</span>
-          <span className="max-w-[14ch] text-[15px] font-medium uppercase leading-[1.15] tracking-[0.01em] sm:text-[18px]">
+        <div className="relative z-[2] flex min-w-0 flex-col gap-1.5">
+          <span className="eyebrow truncate opacity-80">{index > 0 ? `${item.subcategory} · ${item.condition}` : item.brand}</span>
+          <span className="line-clamp-4 max-w-[16ch] text-[12px] font-medium uppercase leading-[1.15] tracking-[0.01em] hyphens-auto break-words sm:text-[16px] lg:text-[18px]">
             {item.name}
           </span>
         </div>

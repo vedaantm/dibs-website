@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Edit } from "@/data/types";
-import { gradientClass, gradientIsDark, hasImage } from "@/lib/images";
+import { tileClass, gradientIsDark, hasImage } from "@/lib/images";
 
 type Props = { edits: (Edit & { count: number; from: string })[] };
 
@@ -111,7 +111,7 @@ export function EditsCarousel({ edits }: Props) {
                 <div
                   className={clsx(
                     "relative flex aspect-[4/5] flex-col justify-between overflow-hidden p-5 md:p-6",
-                    gradientClass[e.gradient],
+                    tileClass[e.gradient],
                     "grain",
                     dark ? "on-dark text-paper" : "text-ink",
                   )}

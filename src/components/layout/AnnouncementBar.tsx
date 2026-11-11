@@ -56,7 +56,8 @@ export function AnnouncementBar() {
   };
 
   return (
-    <div
+    <section
+      aria-label="Announcements"
       className="on-dark relative z-40 flex h-9 items-center justify-center bg-ink px-12 text-paper"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -85,6 +86,6 @@ export function AnnouncementBar() {
       >
         <X size={14} strokeWidth={1.25} aria-hidden />
       </button>
-    </div>
+    </section>
   );
 }

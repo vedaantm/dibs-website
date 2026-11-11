@@ -27,7 +27,7 @@ export function Wordmark({ tone = "ink", size = "md", compact = false, className
       )}
     >
       {/* left padding balances the trailing letter-spacing so the mark sits optically centered */}
-      <span className={clsx("wordmark block pl-[0.18em]", s.mark)}>DIBS</span>
+      <span className={clsx("wordmark block pl-[0.18em]", s.mark)}>DIBS</span>{" "}
       {!compact && (
         <span className={clsx("wordmark mt-[0.6em] block pl-[0.3em] !tracking-[0.3em]", s.sub)}>
           STUDENT RENTALS

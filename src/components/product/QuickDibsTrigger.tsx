@@ -91,7 +91,7 @@ export function QuickDibsTrigger({ slug, name }: { slug: string; name: string })
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
         aria-label={`Quick dibs: ${name}`}
-        className="absolute bottom-2 right-2 z-[3] inline-flex size-8 items-center justify-center bg-ink text-paper md:hidden"
+        className="absolute right-2 top-12 z-[3] inline-flex size-8 items-center justify-center bg-ink text-paper md:hidden"
       >
         <Plus size={18} strokeWidth={1.25} aria-hidden />
       </button>

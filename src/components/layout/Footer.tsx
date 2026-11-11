@@ -92,14 +92,19 @@ export function Footer() {
         </div>
       </div>
 
-      <div aria-hidden className="pointer-events-none -mb-[4.5vw] select-none overflow-hidden text-center leading-[0.8]">
-        <span
-          className="block whitespace-nowrap font-[family-name:var(--font-wordmark)] text-[18vw] tracking-[0.18em] text-paper/[0.08]"
-          style={{ fontWeight: 200, fontStretch: "125%", fontVariationSettings: '"wdth" 125' }}
+      {/* decorative: SVG text so it isn't read or contrast-checked as content */}
+      <svg aria-hidden focusable="false" viewBox="0 0 1000 150" className="pointer-events-none -mb-[3vw] block w-full select-none">
+        <text
+          x="500"
+          y="182"
+          textAnchor="middle"
+          fill="currentColor"
+          className="text-paper/[0.08]"
+          style={{ fontFamily: "var(--font-wordmark)", fontSize: 180, fontWeight: 200, fontStretch: "125%", fontVariationSettings: '"wdth" 125', letterSpacing: "0.18em" }}
         >
           DIBS
-        </span>
-      </div>
+        </text>
+      </svg>
     </footer>
   );
 }

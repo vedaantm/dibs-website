@@ -109,6 +109,12 @@ body {
 .bg-chalk {
   background: var(--g-chalk);
 }
+/* chalk wash on a blush base, for image tiles that sit on the paper page */
+.tile-chalk {
+  background:
+    radial-gradient(120% 80% at 100% 0%, #eadbcb 0%, transparent 60%),
+    radial-gradient(100% 90% at 0% 100%, #efe7de 0%, transparent 60%), #e7dad1;
+}
 
 /* Grain overlay: put .grain on any gradient block */
 .grain {

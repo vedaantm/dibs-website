@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { CategoryStrip } from "@/components/home/CategoryStrip";
+import { DemoReset } from "@/components/home/DemoReset";
 import { Comparison } from "@/components/home/Comparison";
 import { EditsCarousel } from "@/components/home/EditsCarousel";
 import { Hero } from "@/components/home/Hero";
@@ -21,6 +23,9 @@ export default function HomePage() {
 
   return (
     <>
+      <Suspense>
+        <DemoReset />
+      </Suspense>
       <Hero />
       <CategoryStrip />
 

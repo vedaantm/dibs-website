@@ -103,11 +103,12 @@ export function BagDrawer() {
               </div>
               {t.depositTotal > 0 && (
                 <div className="flex justify-between text-stone-deep">
-                  <dt>Deposit hold {formatCents(t.depositTotal)} — not charged</dt>
+                  <dt>Deposit hold — not charged</dt>
+                  <dd className="tabular-nums">{formatCents(t.depositTotal)}</dd>
                 </div>
               )}
-              <p className="text-stone-deep">Tax at checkout</p>
             </dl>
+            <p className="text-stone-deep">Tax at checkout</p>
             {t.hasIssues && (
               <p role="alert" className="mt-2 text-vermilion-deep">
                 Fix the dates above before checkout.

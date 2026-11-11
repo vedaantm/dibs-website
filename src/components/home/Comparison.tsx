@@ -18,7 +18,8 @@ export function Comparison() {
         <h2 id="compare-title" className="section-title mb-8 max-w-3xl md:mb-12">
           Why not just use Marketplace?
         </h2>
-        <Reveal className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+        <Reveal className="-mx-4 px-4 md:mx-0 md:px-0">
+          <div role="region" aria-label="Comparison table, scrolls sideways on small screens" tabIndex={0} className="overflow-x-auto">
           <table className="w-full min-w-[620px] border-collapse text-left">
             <caption className="sr-only">Dibs compared with Facebook Marketplace and group chats, and buying retail</caption>
             <thead>
@@ -50,6 +51,7 @@ export function Comparison() {
               ))}
             </tbody>
           </table>
+          </div>
         </Reveal>
         <p className="mt-6 max-w-2xl text-stone-deep">
           Marketplace is free because you carry the risk. The fee pays for the hold, the reviews and the damage protection.

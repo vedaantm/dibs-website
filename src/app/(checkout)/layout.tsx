@@ -10,8 +10,9 @@ export default function CheckoutLayout({ children }: LayoutProps<"/">) {
       <header className="border-b border-line">
         <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-4 px-4 md:h-20 md:px-6">
           <div className="flex items-center gap-4 md:gap-6">
-            <Link href="/" aria-label="Dibs Student Rentals, home">
+            <Link href="/">
               <Wordmark size="sm" />
+            <span className="sr-only">, home</span>
             </Link>
             <Eyebrow className="hidden sm:block">Secure checkout</Eyebrow>
           </div>
