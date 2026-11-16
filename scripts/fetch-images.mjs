@@ -2,8 +2,8 @@
 //
 //   Unsplash (default):  put UNSPLASH_ACCESS_KEY=... in .env.local, then `npm run images`
 //                        (demo keys allow 50 requests/hour, so a full run can take a few hours)
-//   Pexels:              put PEXELS_API_KEY=... in .env.local (free, instant at pexels.com/api),
-//                        then `npm run images -- --source=pexels` (200 requests/hour: one run does it)
+//   Pixabay:             put PIXABAY_API_KEY=... in .env.local (free: sign up, key is on pixabay.com/api/docs),
+//                        then `npm run images -- --source=pixabay` (100 requests/minute: one run does it)
 //
 // - Searches each item's imageQuery for portrait photos and saves the top 2 at 1200px wide
 //   into public/items/<slug>/1.jpg and 2.jpg. If a query finds too few, it retries simpler
@@ -20,7 +20,9 @@ import sharp from "sharp";
 
 const root = process.cwd();
 const APP = "dibs_demo";
-const source = (process.argv.find((a) => a.startsWith("--source="))?.split("=")[1] ?? "unsplash").toLowerCase();
+// PowerShell drops the `--` in `npm run images -- --source=x`, so npm keeps the flag as its own
+// config and exposes it as npm_config_source. Read both.
+const source = (process.argv.find((a) => a.startsWith("--source="))?.split("=")[1] ?? process.env.npm_config_source ?? "unsplash").toLowerCase();
 
 function readKey(name) {
   if (process.env[name]) return process.env[name];
@@ -58,7 +60,7 @@ function unsplashProvider(key) {
   return {
     label: "Unsplash",
     delay: 300,
-    rateHint: "demo keys allow 50 requests/hour. Run `npm run images` again later, or `npm run images -- --source=pexels` with a Pexels key",
+    rateHint: "demo keys allow 50 requests/hour. Run `npm run images` again later, or `npm run images -- --source=pixabay` with a Pixabay key",
     async search(query, t) {
       const url = new URL("https://api.unsplash.com/search/photos");
       url.searchParams.set("query", query);
@@ -84,47 +86,51 @@ function unsplashProvider(key) {
   };
 }
 
-function pexelsProvider(key) {
+function pixabayProvider(key) {
   return {
-    label: "Pexels",
-    delay: 250,
-    rateHint: "Pexels allows 200 requests/hour. Run it again later",
+    label: "Pixabay",
+    delay: 700,
+    rateHint: "Pixabay allows 100 requests/minute. Wait a minute and run it again",
     async search(query, t) {
-      const url = new URL("https://api.pexels.com/v1/search");
-      url.searchParams.set("query", query);
-      url.searchParams.set("orientation", t.orientation ?? "portrait");
-      url.searchParams.set("per_page", "15");
-      const res = await fetch(url, { headers: { Authorization: key } });
+      const url = new URL("https://pixabay.com/api/");
+      url.searchParams.set("key", key);
+      url.searchParams.set("q", query.slice(0, 100));
+      url.searchParams.set("image_type", "photo");
+      url.searchParams.set("orientation", (t.orientation ?? "portrait") === "portrait" ? "vertical" : "horizontal");
+      url.searchParams.set("safesearch", "true");
+      url.searchParams.set("per_page", "20");
+      const res = await fetch(url);
       if (res.status === 429) throw new RateLimited("rate limited (429)");
-      if (res.status === 401 || res.status === 403) throw new RateLimited(`${res.status}: PEXELS_API_KEY was rejected`);
+      if (res.status === 400 && /key/i.test(await res.clone().text())) throw new RateLimited("PIXABAY_API_KEY was rejected");
       if (!res.ok) throw new Error(`search ${res.status} ${res.statusText}`);
       const data = await res.json();
-      return (data.photos ?? []).map((p) => ({
-        page: p.url,
-        image: `${p.src.original}?auto=compress&cs=tinysrgb&w=1200`,
-        width: p.width,
-        height: p.height,
-        name: p.photographer,
-        profile: p.photographer_url,
-        source: "Pexels",
+      return (data.hits ?? []).map((p) => ({
+        page: p.pageURL,
+        // Pixabay doesn't allow hotlinking; the photo is downloaded and stored locally.
+        image: p.largeImageURL,
+        width: p.imageWidth,
+        height: p.imageHeight,
+        name: p.user,
+        profile: `https://pixabay.com/users/${p.user}-${p.user_id}/`,
+        source: "Pixabay",
       }));
     },
   };
 }
 
 let provider;
-if (source === "pexels") {
-  const key = readKey("PEXELS_API_KEY");
+if (source === "pixabay") {
+  const key = readKey("PIXABAY_API_KEY");
   if (!key) {
-    console.log("No PEXELS_API_KEY found in .env.local. Get a free key at pexels.com/api (instant), add it, and run again.");
+    console.log("No PIXABAY_API_KEY found in .env.local. Sign up free at pixabay.com, copy the key from pixabay.com/api/docs, add it, and run again.");
     process.exit(0);
   }
-  provider = pexelsProvider(key);
+  provider = pixabayProvider(key);
 } else {
   const key = readKey("UNSPLASH_ACCESS_KEY");
   if (!key) {
     console.log("No UNSPLASH_ACCESS_KEY found in .env.local, so no photos were fetched.");
-    console.log("Add a key and run `npm run images`, or use Pexels: PEXELS_API_KEY=... in .env.local, then `npm run images -- --source=pexels`.");
+    console.log("Add a key and run `npm run images`, or use Pixabay: PIXABAY_API_KEY=... in .env.local, then `npm run images -- --source=pixabay`.");
     spawnSync(process.execPath, [join(root, "scripts", "build-image-manifest.mjs")], { stdio: "inherit" });
     process.exit(0);
   }
@@ -133,18 +139,35 @@ if (source === "pexels") {
 
 const creditsPath = join(root, "public", "items", "credits.json");
 mkdirSync(join(root, "public", "items"), { recursive: true });
-const credits = existsSync(creditsPath) ? JSON.parse(readFileSync(creditsPath, "utf8")) : {};
+const readCredits = () => (existsSync(creditsPath) ? JSON.parse(readFileSync(creditsPath, "utf8")) : {});
+const credits = readCredits();
+const newCredits = {};
+
+/** Merge this run's new credits into whatever is on disk now, so overlapping runs can't wipe each other out. */
+function saveCredits() {
+  writeFileSync(creditsPath, JSON.stringify({ ...readCredits(), ...newCredits }, null, 2) + "\n");
+}
 
 /** Photo pages already used by an item, so no two listings share a photo. */
 const usedPhotos = new Set(Object.values(credits).map((c) => String(c.photo ?? "").split("?")[0]).filter(Boolean));
 
+// Photos a person looked at and rejected (wrong product, wrong brand). Never picked again.
+const rejectedPath = join(root, "scripts", "rejected-photos.json");
+if (existsSync(rejectedPath)) for (const u of JSON.parse(readFileSync(rejectedPath, "utf8"))) usedPhotos.add(String(u).split("?")[0]);
+
 const FILLER = new Set(["studio", "product", "white", "background", "flat", "lay", "on", "a", "the", "of", "with", "and", "isolated", "closeup", "close", "up", "shot", "photo"]);
 
-/** The query as written, then without filler words, then its first one or two words. */
+/**
+ * The query as written, then without filler words, then its last two words (usually the
+ * product noun: "handheld garment steamer" -> "garment steamer"), then its first two.
+ * Never drops to a single word unless the query only had one: one word ("cordless",
+ * "portable") matches anything.
+ */
 function simplerQueries(q) {
   const words = q.toLowerCase().split(/\s+/).filter(Boolean);
   const core = words.filter((w) => !FILLER.has(w));
-  const list = [q, core.join(" "), core.slice(0, 2).join(" "), core[0]];
+  const list = [q, core.join(" "), core.slice(-2).join(" "), core.slice(0, 2).join(" ")];
+  if (core.length === 1) list.push(core[0]);
   return [...new Set(list.filter(Boolean))];
 }
 
@@ -170,18 +193,21 @@ let skipped = 0;
 const failed = [];
 
 for (const t of targets) {
-  const have = existsSync(t.dir) ? readdirSync(t.dir).filter((f) => /\.(jpe?g|png|webp)$/i.test(f)) : [];
-  if (have.length > 0) {
+  // Fill only the missing slots (1.jpg / 2.jpg), so a single rejected photo can be replaced.
+  const have = existsSync(t.dir) ? readdirSync(t.dir) : [];
+  const missing = t.names.filter((n) => !have.includes(n));
+  if (missing.length === 0) {
     skipped++;
     continue;
   }
+  const need = missing.length;
   try {
     let results = [];
     let used = t.query;
     for (const q of simplerQueries(t.query)) {
       results = await search(q, t);
       used = q;
-      if (results.length >= t.count) break;
+      if (results.length >= need) break;
       await sleep(provider.delay);
     }
     if (results.length === 0) throw new Error("no results, even for the simplest query");
@@ -189,16 +215,16 @@ for (const t of targets) {
     mkdirSync(t.dir, { recursive: true });
     let saved = 0;
     for (const photo of results) {
-      if (saved === t.count) break;
+      if (saved === need) break;
       try {
-        await save(photo, join(t.dir, t.names[saved]));
+        await save(photo, join(t.dir, missing[saved]));
       } catch {
         continue; // dead link or unreadable file: try the next result
       }
       photo.ping?.();
       usedPhotos.add(photo.page.split("?")[0]);
-      const publicPath = t.key === "hero" ? `/hero/${t.names[saved]}` : `/items/${t.key}/${t.names[saved]}`;
-      credits[publicPath] = {
+      const publicPath = t.key === "hero" ? `/hero/${missing[saved]}` : `/items/${t.key}/${missing[saved]}`;
+      credits[publicPath] = newCredits[publicPath] = {
         name: photo.name,
         profile: photo.profile,
         photo: photo.source === "Unsplash" ? `${photo.page}?utm_source=${APP}&utm_medium=referral` : photo.page,
@@ -208,6 +234,7 @@ for (const t of targets) {
       saved++;
     }
     if (saved === 0) throw new Error("every result failed to download");
+    saveCredits();
     fetched++;
     console.log(`ok   ${t.key} (${saved})`);
   } catch (err) {
@@ -222,7 +249,7 @@ for (const t of targets) {
   await sleep(provider.delay);
 }
 
-writeFileSync(creditsPath, JSON.stringify(credits, null, 2) + "\n");
+saveCredits();
 console.log(`\nFetched ${fetched}, skipped ${skipped} (already had photos), failed ${failed.length}.`);
 if (failed.length) console.log(`Failed: ${failed.join(", ")}`);
 spawnSync(process.execPath, [join(root, "scripts", "build-image-manifest.mjs")], { stdio: "inherit" });

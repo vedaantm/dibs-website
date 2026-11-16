@@ -55,7 +55,7 @@
     "photo": "https://unsplash.com/photos/red-panasonic-wireless-phone-beside-white-paper-_1fByLYHA_0?utm_source=dibs_demo&utm_medium=referral"
   },
   "/items/stewart-calculus-9e/2.jpg": {
-    "name": "Minh Đức",
+    "name": "Minh \u0110\u1ee9c",
     "profile": "https://unsplash.com/@meanduck?utm_source=dibs_demo&utm_medium=referral",
     "photo": "https://unsplash.com/photos/desk-with-calculator-pens-and-study-papers-xY83U6AHXP4?utm_source=dibs_demo&utm_medium=referral"
   },
@@ -137,12 +137,220 @@
     "license": "CC BY 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
   },
+  "/items/gopro-hero13-black/1.jpg": {
+    "name": "Noah Pienaar",
+    "profile": "https://unsplash.com/@unsealmyname?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/a-blue-camera-sitting-on-top-of-a-wooden-pole-S5IvP9WGWO0?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/gopro-hero13-black/2.jpg": {
+    "name": "Noah Pienaar",
+    "profile": "https://unsplash.com/@unsealmyname?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/a-blue-camera-sitting-on-top-of-a-wooden-post-0H2FEzRU7BU?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/dji-osmo-pocket-3/1.jpg": {
+    "name": "Mika Baumeister",
+    "profile": "https://unsplash.com/@kommumikation?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/black-and-gray-camera-on-red-background-cj3zOotO_P0?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/dji-osmo-pocket-3/2.jpg": {
+    "name": "Will Haddock",
+    "profile": "https://unsplash.com/@willhaddock?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/hand-holding-a-small-black-gimbal-camera-RZ19amtL1Fs?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/xgimi-mogo-3-pro/1.jpg": {
+    "name": "Dylan Calluy",
+    "profile": "https://unsplash.com/@dylancalluy?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/white-and-black-portable-speaker-h7CFj3odRb8?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/xgimi-mogo-3-pro/2.jpg": {
+    "name": "Valerion 4K Projector",
+    "profile": "https://unsplash.com/@valerion_official?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/couple-watches-movie-on-outdoor-projector-screen-at-night-iYkIZ9wIyBU?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/yeti-tundra-45/1.jpg": {
+    "name": "Blake Carpenter",
+    "profile": "https://unsplash.com/@blakepnw?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/clear-glass-bottles-on-black-plastic-container-DECmqXFqAy0?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/yeti-tundra-45/2.jpg": {
+    "name": "Hans",
+    "profile": "https://unsplash.com/@hansphoto?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/brown-and-gray-travel-luggage-L25DA60BfU0?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/weber-q1200/1.jpg": {
+    "name": "Aral Tasher",
+    "profile": "https://unsplash.com/@araltasher?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/person-grilling-meat-outdoors-vWqES2F2G1o?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/weber-q1200/2.jpg": {
+    "name": "Bianca Ackermann",
+    "profile": "https://unsplash.com/@biancablah?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/grilled-meat-on-black-outdoor-grill-49g99KrBnnQ?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/gosports-cornhole/1.jpg": {
+    "name": "Salvidor Cade",
+    "profile": "https://unsplash.com/@salvidorcade?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/cornhole-boards-and-bags-on-green-turf-FPrhvKa7-qU?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/gosports-cornhole/2.jpg": {
+    "name": "Steve Lieman",
+    "profile": "https://unsplash.com/@stevelieman?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/two-women-playing-a-game-of-bean-bag-toss-2fH5WKaIg1k?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
+  },
+  "/items/burton-ripcord-154/1.jpg": {
+    "name": "Timmyspics",
+    "profile": "https://pixabay.com/users/Timmyspics-15070595/",
+    "photo": "https://pixabay.com/photos/snowboard-man-snow-snowboarding-4803050/",
+    "source": "Pixabay"
+  },
+  "/items/burton-ripcord-154/2.jpg": {
+    "name": "Alexandra_Koch",
+    "profile": "https://pixabay.com/users/Alexandra_Koch-621802/",
+    "photo": "https://pixabay.com/photos/man-snowboard-winter-adventure-7046130/",
+    "source": "Pixabay"
+  },
+  "/items/rossignol-experience-80/1.jpg": {
+    "name": "garten-gg",
+    "profile": "https://pixabay.com/users/garten-gg-201217/",
+    "photo": "https://pixabay.com/photos/sports-winter-ski-old-ski-break-3887968/",
+    "source": "Pixabay"
+  },
+  "/items/rossignol-experience-80/2.jpg": {
+    "name": "MartinKI07",
+    "profile": "https://pixabay.com/users/MartinKI07-14652946/",
+    "photo": "https://pixabay.com/photos/cabin-snow-clouds-mountains-8949074/",
+    "source": "Pixabay"
+  },
+  "/items/myers-psychology-13e/1.jpg": {
+    "name": "congerdesign",
+    "profile": "https://pixabay.com/users/congerdesign-509903/",
+    "photo": "https://pixabay.com/photos/book-read-book-pages-literature-3964050/",
+    "source": "Pixabay"
+  },
+  "/items/disco-sequin-jumpsuit/1.jpg": {
+    "name": "OurWhiskyFoundation",
+    "profile": "https://pixabay.com/users/OurWhiskyFoundation-30201434/",
+    "photo": "https://pixabay.com/photos/whisky-whiskey-drinking-drink-8443155/",
+    "source": "Pixabay"
+  },
+  "/items/disco-sequin-jumpsuit/2.jpg": {
+    "name": "Sunriseforever",
+    "profile": "https://pixabay.com/users/Sunriseforever-6314823/",
+    "photo": "https://pixabay.com/photos/woman-fashion-style-model-pose-9589862/",
+    "source": "Pixabay"
+  },
+  "/items/toga-party-set/1.jpg": {
+    "name": "Surprising_Media",
+    "profile": "https://pixabay.com/users/Surprising_Media-11873433/",
+    "photo": "https://pixabay.com/photos/man-costume-toga-cosplay-tattoo-7321517/",
+    "source": "Pixabay"
+  },
+  "/items/inflatable-t-rex/1.jpg": {
+    "name": "Sunriseforever",
+    "profile": "https://pixabay.com/users/Sunriseforever-6314823/",
+    "photo": "https://pixabay.com/photos/boy-vintage-retro-child-toy-50s-7729347/",
+    "source": "Pixabay"
+  },
+  "/items/inflatable-t-rex/2.jpg": {
+    "name": "OltreCreativeAgency",
+    "profile": "https://pixabay.com/users/OltreCreativeAgency-3441225/",
+    "photo": "https://pixabay.com/photos/natural-history-museum-dinosaur-bones-1757353/",
+    "source": "Pixabay"
+  },
+  "/items/western-kit/1.jpg": {
+    "name": "RonaldPlett",
+    "profile": "https://pixabay.com/users/RonaldPlett-5139674/",
+    "photo": "https://pixabay.com/photos/cowboy-person-farmer-farm-8206536/",
+    "source": "Pixabay"
+  },
+  "/items/western-kit/2.jpg": {
+    "name": "822640",
+    "profile": "https://pixabay.com/users/822640-822640/",
+    "photo": "https://pixabay.com/photos/cowgirl-hat-country-western-ranch-4190437/",
+    "source": "Pixabay"
+  },
+  "/items/ti-84-plus-ce/1.jpg": {
+    "name": "adonyig",
+    "profile": "https://pixabay.com/users/adonyig-4265448/",
+    "photo": "https://pixabay.com/photos/school-tools-color-crayon-paint-3596686/",
+    "source": "Pixabay"
+  },
+  "/items/ti-84-plus-ce/2.jpg": {
+    "name": "True3DNow",
+    "profile": "https://pixabay.com/users/True3DNow-5048939/",
+    "photo": "https://pixabay.com/photos/solar-calculator-pi-math-office-2505345/",
+    "source": "Pixabay"
+  },
+  "/items/canon-eos-r50-kit/1.jpg": {
+    "name": "al_barizi",
+    "profile": "https://pixabay.com/users/al_barizi-18526670/",
+    "photo": "https://pixabay.com/photos/camera-photography-lens-8073123/",
+    "source": "Pixabay"
+  },
+  "/items/canon-eos-r50-kit/2.jpg": {
+    "name": "\u0413\u0440\u043e\u043c_\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440",
+    "profile": "https://pixabay.com/users/\u0413\u0440\u043e\u043c_\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440-25690771/",
+    "photo": "https://pixabay.com/photos/camera-lens-photography-canon-7111476/",
+    "source": "Pixabay"
+  },
+  "/hero/textbooks.jpg": {
+    "name": "jarmoluk",
+    "profile": "https://pixabay.com/users/jarmoluk-143740/",
+    "photo": "https://pixabay.com/photos/apple-books-still-life-fruit-food-256261/",
+    "source": "Pixabay"
+  },
   "/items/flapper-dress-1920s/2.jpg": {
-    "name": "rbd4n",
-    "profile": "https://www.flickr.com/photos/195065336@N02",
-    "photo": "https://www.flickr.com/photos/195065336@N02/54688740669",
-    "source": "Flickr",
-    "license": "Public domain",
-    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+    "name": "J-SEBASTIEN",
+    "profile": "https://pixabay.com/users/J-SEBASTIEN-9209932/",
+    "photo": "https://pixabay.com/photos/woman-portrait-beauty-beautiful-7155805/",
+    "source": "Pixabay"
+  },
+  "/items/fujifilm-instax-mini-12/1.jpg": {
+    "name": "markusspiske",
+    "profile": "https://pixabay.com/users/markusspiske-670330/",
+    "photo": "https://pixabay.com/photos/analog-antique-aperture-background-1513895/",
+    "source": "Pixabay"
+  },
+  "/items/fujifilm-instax-mini-12/2.jpg": {
+    "name": "lacelee2010",
+    "profile": "https://pixabay.com/users/lacelee2010-7645564/",
+    "photo": "https://pixabay.com/photos/wood-wooden-basket-3072499/",
+    "source": "Pixabay"
+  },
+  "/items/dyson-v8/1.jpg": {
+    "name": "PublicDomainPictures",
+    "profile": "https://pixabay.com/users/PublicDomainPictures-14/",
+    "photo": "https://pixabay.com/photos/appliance-clean-cleaner-domestic-2255/",
+    "source": "Pixabay"
+  },
+  "/items/dyson-v8/2.jpg": {
+    "name": "jarmoluk",
+    "profile": "https://pixabay.com/users/jarmoluk-143740/",
+    "photo": "https://pixabay.com/photos/vacuum-cleaner-vacuuming-cleaning-268169/",
+    "source": "Pixabay"
+  },
+  "/items/myers-psychology-13e/2.jpg": {
+    "name": "Pexels",
+    "profile": "https://pixabay.com/users/Pexels-2286921/",
+    "photo": "https://pixabay.com/photos/books-feet-legs-person-reading-1841116/",
+    "source": "Pixabay"
+  },
+  "/items/jbl-charge-5/1.jpg": {
+    "name": "Jonas Jacobsson",
+    "profile": "https://unsplash.com/@jonasjacobsson?utm_source=dibs_demo&utm_medium=referral",
+    "photo": "https://unsplash.com/photos/selective-focus-photography-of-black-and-gray-portable-speaker-VSYq9nS-fY0?utm_source=dibs_demo&utm_medium=referral",
+    "source": "Unsplash"
   }
 }
