@@ -3,7 +3,7 @@ import type { GradientName } from "@/data/types";
 
 const FILES = new Set<string>(manifest.files);
 
-export type Credit = { name: string; profile: string; photo?: string };
+export type Credit = { name: string; profile: string; photo?: string; source?: string; license?: string; licenseUrl?: string };
 
 export function hasImage(path: string | undefined): path is string {
   return Boolean(path && FILES.has(path));

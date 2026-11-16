@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Sheet, SheetHeader } from "@/components/ui/Sheet";
 import { imageCredits } from "@/lib/images";
 
-/** Footer link that opens a small modal listing Unsplash photographers from credits.json. */
+/** Footer link that opens a small modal listing photographers (and licenses) from credits.json. */
 export function PhotoCredits() {
   const [open, setOpen] = useState(false);
   const credits = Object.entries(imageCredits());
@@ -22,14 +22,34 @@ export function PhotoCredits() {
             </p>
           ) : (
             <>
-              <p className="mb-4 text-stone-deep">Product photos via Unsplash. Lenders&apos; own photos replace these as they upload.</p>
+              <p className="mb-4 text-stone-deep">
+                Stock product photos ({[...new Set(credits.map(([, c]) => c.source ?? "Unsplash"))].join(", ")}). Lenders&apos; own photos replace these as they upload.
+              </p>
               <ul className="divide-y divide-line border-y border-line">
                 {credits.map(([path, c]) => (
                   <li key={path} className="flex items-baseline justify-between gap-4 py-2">
                     <span className="truncate text-stone-deep">{path.replace("/items/", "").replace(/\/\d\.jpg$/, "")}</span>
-                    <a href={c.profile} target="_blank" rel="noreferrer" className="shrink-0 underline underline-offset-4">
-                      {c.name}
-                    </a>
+                    <span className="shrink-0 text-right">
+                      <a href={c.photo ?? c.profile} target="_blank" rel="noreferrer" className="underline underline-offset-4">
+                        {c.name}
+                      </a>
+                      <span className="text-stone-deep">
+                        {" "}
+                        · {c.source ?? "Unsplash"}
+                        {c.license && (
+                          <>
+                            {" · "}
+                            {c.licenseUrl ? (
+                              <a href={c.licenseUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">
+                                {c.license}
+                              </a>
+                            ) : (
+                              c.license
+                            )}
+                          </>
+                        )}
+                      </span>
+                    </span>
                   </li>
                 ))}
               </ul>

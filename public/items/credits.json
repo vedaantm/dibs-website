@@ -55,7 +55,7 @@
     "photo": "https://unsplash.com/photos/red-panasonic-wireless-phone-beside-white-paper-_1fByLYHA_0?utm_source=dibs_demo&utm_medium=referral"
   },
   "/items/stewart-calculus-9e/2.jpg": {
-    "name": "Minh \u0110\u1ee9c",
+    "name": "Minh Đức",
     "profile": "https://unsplash.com/@meanduck?utm_source=dibs_demo&utm_medium=referral",
     "photo": "https://unsplash.com/photos/desk-with-calculator-pens-and-study-papers-xY83U6AHXP4?utm_source=dibs_demo&utm_medium=referral"
   },
@@ -128,5 +128,21 @@
     "name": "Juan Goyache",
     "profile": "https://unsplash.com/@goyache?utm_source=dibs_demo&utm_medium=referral",
     "photo": "https://unsplash.com/photos/woman-in-black-leather-jacket-covering-her-face-with-her-hands-xAybtswwBEk?utm_source=dibs_demo&utm_medium=referral"
+  },
+  "/items/flapper-dress-1920s/1.jpg": {
+    "name": "quinet",
+    "profile": "https://www.flickr.com/photos/91994044@N00",
+    "photo": "https://www.flickr.com/photos/91994044@N00/52793869333",
+    "source": "Flickr",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
+  },
+  "/items/flapper-dress-1920s/2.jpg": {
+    "name": "rbd4n",
+    "profile": "https://www.flickr.com/photos/195065336@N02",
+    "photo": "https://www.flickr.com/photos/195065336@N02/54688740669",
+    "source": "Flickr",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
   }
 }
