@@ -1,4 +1,162 @@
 {
-  "files": [],
-  "credits": {}
+  "files": [
+    "/items/campbell-biology-12e/1.jpg",
+    "/items/campbell-biology-12e/2.jpg",
+    "/items/canada-goose-expedition/1.jpg",
+    "/items/canada-goose-expedition/2.jpg",
+    "/items/coleman-sundome-4/1.jpg",
+    "/items/coleman-sundome-4/2.jpg",
+    "/items/klein-organic-chemistry-4e/1.jpg",
+    "/items/klein-organic-chemistry-4e/2.jpg",
+    "/items/lauren-jersey-gown-navy/1.jpg",
+    "/items/lauren-jersey-gown-navy/2.jpg",
+    "/items/mankiw-economics-10e/1.jpg",
+    "/items/mankiw-economics-10e/2.jpg",
+    "/items/patagonia-black-hole-55/1.jpg",
+    "/items/patagonia-black-hole-55/2.jpg",
+    "/items/reformation-satin-slip-midi/1.jpg",
+    "/items/reformation-satin-slip-midi/2.jpg",
+    "/items/stewart-calculus-9e/1.jpg",
+    "/items/stewart-calculus-9e/2.jpg",
+    "/items/suitsupply-havana-navy/1.jpg",
+    "/items/suitsupply-havana-navy/2.jpg",
+    "/items/suitsupply-lazio-tuxedo/1.jpg",
+    "/items/suitsupply-lazio-tuxedo/2.jpg",
+    "/items/tnf-freedom-insulated/1.jpg",
+    "/items/tnf-freedom-insulated/2.jpg",
+    "/items/wilson-clash-100-v2/1.jpg",
+    "/items/wilson-clash-100-v2/2.jpg"
+  ],
+  "credits": {
+    "/items/tnf-freedom-insulated/1.jpg": {
+      "name": "Josh Marty",
+      "profile": "https://unsplash.com/@jaym30?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/person-in-black-snowboard-pants-8BLZZC5qOXM?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/tnf-freedom-insulated/2.jpg": {
+      "name": "Thomas Marquize",
+      "profile": "https://unsplash.com/@tomarquize?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/person-in-winter-gear-standing-in-snowy-forest-qMnGGbKgD1M?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/wilson-clash-100-v2/1.jpg": {
+      "name": "Kingsley Mkpandiok",
+      "profile": "https://unsplash.com/@iamkingsleey?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/tennis-balls-and-racket-on-court-7FJUFWs1E0A?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/wilson-clash-100-v2/2.jpg": {
+      "name": "Kingsley Mkpandiok",
+      "profile": "https://unsplash.com/@iamkingsleey?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/tennis-ball-between-two-black-rackets-YCC-e7qGTXk?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/coleman-sundome-4/1.jpg": {
+      "name": "Triston Dunn",
+      "profile": "https://unsplash.com/@tristondunn?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/blue-and-orange-dome-tent-in-forest-during-daytime-gDElF4RMYbY?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/coleman-sundome-4/2.jpg": {
+      "name": "Pattanapong Tuamkhum",
+      "profile": "https://unsplash.com/@k33pcalmncapture?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-group-of-tents-on-a-field-K81YThadgfM?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/patagonia-black-hole-55/1.jpg": {
+      "name": "Charles Puaud",
+      "profile": "https://unsplash.com/@charlesp25?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/woman-with-pink-duffel-bag-walking-on-sidewalk-YFFj8Vv9v8c?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/patagonia-black-hole-55/2.jpg": {
+      "name": "gabbiistudios",
+      "profile": "https://unsplash.com/@gabrielonodegba?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/two-women-in-athletic-wear-holding-a-pink-duffel-bag-_q-XZ1DYEZA?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/campbell-biology-12e/1.jpg": {
+      "name": "Bao Menglong",
+      "profile": "https://unsplash.com/@__menglong?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-close-up-of-an-open-book-on-a-table-0hjHCGW9VG8?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/campbell-biology-12e/2.jpg": {
+      "name": "NMG Network",
+      "profile": "https://unsplash.com/@nmgnetwork?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/green-and-black-book-on-white-table-1OuY1iPO7pk?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/stewart-calculus-9e/1.jpg": {
+      "name": "Vishwarajsinh Rana",
+      "profile": "https://unsplash.com/@vishwarajsinh?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/red-panasonic-wireless-phone-beside-white-paper-_1fByLYHA_0?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/stewart-calculus-9e/2.jpg": {
+      "name": "Minh Đức",
+      "profile": "https://unsplash.com/@meanduck?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/desk-with-calculator-pens-and-study-papers-xY83U6AHXP4?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/mankiw-economics-10e/1.jpg": {
+      "name": "Bernd Klutsch",
+      "profile": "https://unsplash.com/@medienmassiv?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/pile-of-books-nE2HV5AUXFo?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/mankiw-economics-10e/2.jpg": {
+      "name": "Jodie Cook",
+      "profile": "https://unsplash.com/@jodiecook?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-stack-of-books-sitting-on-top-of-a-wooden-table-4oWVK0y3aUc?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/klein-organic-chemistry-4e/1.jpg": {
+      "name": "Resource Database",
+      "profile": "https://unsplash.com/@resourcedatabase?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/shape-SPQCZ4pmG1U?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/klein-organic-chemistry-4e/2.jpg": {
+      "name": "Jon Tyson",
+      "profile": "https://unsplash.com/@jontyson?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/chomsky-foucault-book-on-table-gOH6tBlQc8c?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/suitsupply-havana-navy/1.jpg": {
+      "name": "Vetrivel Viswanathar",
+      "profile": "https://unsplash.com/@vetrivikashviswanathar?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-suit-on-a-swinger-LkR6zTayf-o?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/suitsupply-havana-navy/2.jpg": {
+      "name": "Korie Cull",
+      "profile": "https://unsplash.com/@korie?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/white-drawstring-jeans-and-hoodie-on-hanger-dVMu8MDBqlY?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/suitsupply-lazio-tuxedo/1.jpg": {
+      "name": "Alvin Mahmudov",
+      "profile": "https://unsplash.com/@alvinmahmudov?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/man-in-black-suit-jacket-ZHmES480_XE?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/suitsupply-lazio-tuxedo/2.jpg": {
+      "name": "Mohamad Khosravi",
+      "profile": "https://unsplash.com/@mohamadkhosravi?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/man-in-black-suit-jacket-and-black-pants-standing-on-gray-concrete-floor-during-daytime-vS0Kya7E5V4?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/reformation-satin-slip-midi/1.jpg": {
+      "name": "Vladimir Fedotov",
+      "profile": "https://unsplash.com/@fedotov_vs?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-woman-in-a-black-dress-kEUoygxtAJI?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/reformation-satin-slip-midi/2.jpg": {
+      "name": "Alexander Jawfox",
+      "profile": "https://unsplash.com/@jawfox_photography?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/woman-in-black-spaghetti-strap-dress-GNd5gstTSg8?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/lauren-jersey-gown-navy/1.jpg": {
+      "name": "lhon karwan",
+      "profile": "https://unsplash.com/@lhonkarwanhamasalih?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-woman-in-a-blue-dress-posing-for-a-picture-98Jmvoh4Ixc?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/lauren-jersey-gown-navy/2.jpg": {
+      "name": "lhon karwan",
+      "profile": "https://unsplash.com/@lhonkarwanhamasalih?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-woman-in-a-blue-dress-posing-for-a-picture-L2jaNBdzIyw?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/canada-goose-expedition/1.jpg": {
+      "name": "Samanta Sokolova",
+      "profile": "https://unsplash.com/@singollare?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/a-woman-standing-in-the-snow-wearing-a-fur-hat-Iyx3io7TxvE?utm_source=dibs_demo&utm_medium=referral"
+    },
+    "/items/canada-goose-expedition/2.jpg": {
+      "name": "Juan Goyache",
+      "profile": "https://unsplash.com/@goyache?utm_source=dibs_demo&utm_medium=referral",
+      "photo": "https://unsplash.com/photos/woman-in-black-leather-jacket-covering-her-face-with-her-hands-xAybtswwBEk?utm_source=dibs_demo&utm_medium=referral"
+    }
+  }
 }

@@ -57,6 +57,9 @@ const headers = { Authorization: `Client-ID ${key}`, "Accept-Version": "v1" };
 
 class RateLimited extends Error {}
 
+/** Unsplash photo pages already used by an item, so no two listings share a photo. */
+const usedPhotos = new Set(Object.values(credits).map((c) => String(c.photo ?? "").split("?")[0]).filter(Boolean));
+
 const FILLER = new Set(["studio", "product", "white", "background", "flat", "lay", "on", "a", "the", "of", "with", "and", "isolated", "closeup", "close", "up", "shot", "photo"]);
 
 /** The query as written, then without filler words, then its first one or two words. */
@@ -80,7 +83,10 @@ async function search(query, t) {
   if (!res.ok) throw new Error(`search ${res.status} ${res.statusText}`);
   const data = await res.json();
   const portrait = (t.orientation ?? "portrait") === "portrait";
-  return (data.results ?? []).filter((p) => !portrait || p.height > p.width * 1.15).slice(0, t.count);
+  return (data.results ?? [])
+    .filter((p) => !portrait || p.height > p.width * 1.15)
+    .filter((p) => !usedPhotos.has(p.links.html))
+    .slice(0, t.count);
 }
 let fetched = 0;
 let skipped = 0;
@@ -115,6 +121,7 @@ for (const t of targets) {
       // Required by Unsplash API guidelines: register the download.
       fetch(photo.links.download_location, { headers }).catch(() => {});
       const publicPath = t.key === "hero" ? `/hero/${t.names[i]}` : `/items/${t.key}/${t.names[i]}`;
+      usedPhotos.add(photo.links.html);
       credits[publicPath] = {
         name: photo.user.name,
         profile: `${photo.user.links.html}?utm_source=${APP}&utm_medium=referral`,
