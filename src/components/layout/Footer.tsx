@@ -26,6 +26,7 @@ const cols: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "/how-it-works#deposits", label: "Deposits & damage" },
       { href: "/how-it-works#late-returns", label: "Late returns" },
       { href: "/how-it-works#verification", label: "Verification" },
+      { href: "/standards", label: "Standards" },
       { href: `mailto:${SITE.contactEmail}`, label: "Contact" },
     ],
   },

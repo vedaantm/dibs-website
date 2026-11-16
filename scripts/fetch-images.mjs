@@ -54,6 +54,34 @@ mkdirSync(join(root, "public", "items"), { recursive: true });
 const credits = existsSync(creditsPath) ? JSON.parse(readFileSync(creditsPath, "utf8")) : {};
 
 const headers = { Authorization: `Client-ID ${key}`, "Accept-Version": "v1" };
+
+class RateLimited extends Error {}
+
+const FILLER = new Set(["studio", "product", "white", "background", "flat", "lay", "on", "a", "the", "of", "with", "and", "isolated", "closeup", "close", "up", "shot", "photo"]);
+
+/** The query as written, then without filler words, then its first one or two words. */
+function simplerQueries(q) {
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean);
+  const core = words.filter((w) => !FILLER.has(w));
+  const list = [q, core.join(" "), core.slice(0, 2).join(" "), core[0]];
+  return [...new Set(list.filter(Boolean))];
+}
+
+/** Top results that are really portrait (taller than wide) for portrait targets. */
+async function search(query, t) {
+  const url = new URL("https://api.unsplash.com/search/photos");
+  url.searchParams.set("query", query);
+  url.searchParams.set("orientation", t.orientation ?? "portrait");
+  url.searchParams.set("per_page", "10");
+  url.searchParams.set("content_filter", "high");
+  const res = await fetch(url, { headers });
+  if (res.status === 403 || res.status === 429) throw new RateLimited(`rate limited (${res.status})`);
+  if (res.status === 401) throw new RateLimited("401: UNSPLASH_ACCESS_KEY was rejected");
+  if (!res.ok) throw new Error(`search ${res.status} ${res.statusText}`);
+  const data = await res.json();
+  const portrait = (t.orientation ?? "portrait") === "portrait";
+  return (data.results ?? []).filter((p) => !portrait || p.height > p.width * 1.15).slice(0, t.count);
+}
 let fetched = 0;
 let skipped = 0;
 const failed = [];
@@ -65,16 +93,18 @@ for (const t of targets) {
     continue;
   }
   try {
-    const url = new URL("https://api.unsplash.com/search/photos");
-    url.searchParams.set("query", t.query);
-    url.searchParams.set("orientation", t.orientation ?? "portrait");
-    url.searchParams.set("per_page", String(t.count));
-    url.searchParams.set("content_filter", "high");
-    const res = await fetch(url, { headers });
-    if (!res.ok) throw new Error(`search ${res.status} ${res.statusText}`);
-    const data = await res.json();
-    const results = (data.results ?? []).slice(0, t.count);
-    if (results.length === 0) throw new Error("no results");
+    // Full query first; if it doesn't give enough good photos, try simpler ones
+    // ("snowboard studio product" -> "snowboard").
+    let results = [];
+    let used = t.query;
+    for (const q of simplerQueries(t.query)) {
+      results = await search(q, t);
+      used = q;
+      if (results.length >= t.count) break;
+      await new Promise((r) => setTimeout(r, 300));
+    }
+    if (results.length === 0) throw new Error("no results, even for the simplest query");
+    if (used !== t.query) console.log(`     ${t.key}: used simpler query "${used}"`);
     mkdirSync(t.dir, { recursive: true });
     for (let i = 0; i < results.length; i++) {
       const photo = results[i];
@@ -94,6 +124,11 @@ for (const t of targets) {
     fetched++;
     console.log(`ok   ${t.key} (${results.length})`);
   } catch (err) {
+    if (err instanceof RateLimited) {
+      console.log(`stop: ${err.message}. Run \`npm run images\` again later (demo keys allow 50 requests/hour); finished items are kept.`);
+      failed.push(...targets.slice(targets.indexOf(t)).filter((x) => !existsSync(x.dir)).map((x) => x.key));
+      break;
+    }
     failed.push(t.key);
     console.log(`skip ${t.key}: ${err.message} (gradient fallback will be used)`);
   }

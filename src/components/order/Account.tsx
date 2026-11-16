@@ -1,10 +1,13 @@
 "use client";
 
-import { BadgeCheck } from "lucide-react";
+import clsx from "clsx";
 import Link from "next/link";
 import { useState } from "react";
 import { lineDatesText } from "@/components/bag/LineDates";
 import { ItemImage } from "@/components/product/ItemImage";
+import { useMyVerification } from "@/components/trust/useMyLevel";
+import { VerificationBadge } from "@/components/trust/VerificationBadge";
+import { VerifyPanel } from "@/components/trust/VerifyPanel";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Tabs } from "@/components/ui/Tabs";
@@ -14,12 +17,19 @@ import { toISODate, today } from "@/lib/dates";
 import { formatCentsExact } from "@/lib/format";
 import { useHydrated } from "@/lib/hooks";
 import { STATUS_LABEL, orderStatus, windowLabel, type Order } from "@/lib/order";
+import { reviewableOrders } from "@/lib/trust";
+import { LEVEL_DESCRIPTION, trustedGap } from "@/lib/verification";
 import { useOrders } from "@/store/orders";
+import { useProfile, useReviews } from "@/store/trust";
+import { ConditionCheck } from "./ConditionCheck";
 import { HandoffCode } from "./HandoffCode";
 
 function OrderRow({ o, todayISO }: { o: Order; todayISO: string }) {
   const [show, setShow] = useState(false);
+  const [check, setCheck] = useState(false);
   const status = orderStatus(o, todayISO);
+  const reviews = useReviews((s) => s.reviews);
+  const toReview = o.lines.filter((l, i, ls) => ls.findIndex((x) => x.slug === l.slug) === i && reviewableOrders(l.slug, [o], reviews, todayISO).length > 0);
   return (
     <li className="border-b border-line py-6">
       <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
@@ -35,7 +45,7 @@ function OrderRow({ o, todayISO }: { o: Order; todayISO: string }) {
             <Link href={`/checkout/confirmed?order=${o.id}`} className="label underline-offset-4 hover:underline">
               Order {o.id}
             </Link>
-            <Tag tone={status === "returned" ? "ink" : "navy"}>{STATUS_LABEL[status]}</Tag>
+            <Tag tone={status === "cancelled" ? "vermilion" : status === "returned" ? "ink" : "navy"}>{STATUS_LABEL[status]}</Tag>
           </div>
           <ul className="mt-2 flex flex-col gap-1">
             {o.lines.map((l, i) => (
@@ -48,19 +58,46 @@ function OrderRow({ o, todayISO }: { o: Order; todayISO: string }) {
           <p className="mt-2 tabular-nums text-stone-deep">
             Paid {formatCentsExact(o.totals.dueTodayCents)}
             {o.depositHold > 0 ? ` · Deposit hold ${formatCentsExact(o.depositHold)}` : ""}
+            {o.cancelledAt ? ` · Refunded ${formatCentsExact(o.refundCents ?? o.totals.dueTodayCents)}` : ""}
           </p>
+          {toReview.length > 0 && (
+            <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              {toReview.map((l) => (
+                <li key={l.slug}>
+                  <Link href={`/item/${l.slug}#reviews`} className="underline underline-offset-4 hover:no-underline">
+                    Review {getItem(l.slug)!.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        {status !== "returned" && (
+        <div className="flex shrink-0 flex-col items-start gap-2 md:items-end">
           <button
             type="button"
-            onClick={() => setShow((s) => !s)}
-            aria-expanded={show}
-            className="label shrink-0 self-start underline underline-offset-4 hover:no-underline"
+            onClick={() => setCheck((s) => !s)}
+            aria-expanded={check}
+            className="label underline underline-offset-4 hover:no-underline"
           >
-            {show ? "Hide handoff code" : "Show handoff code"}
+            {check ? "Hide condition check" : "Condition check"}
           </button>
-        )}
+          {status !== "returned" && status !== "cancelled" && (
+            <button
+              type="button"
+              onClick={() => setShow((s) => !s)}
+              aria-expanded={show}
+              className="label underline underline-offset-4 hover:no-underline"
+            >
+              {show ? "Hide handoff code" : "Show handoff code"}
+            </button>
+          )}
+        </div>
       </div>
+      {check && (
+        <div className="mt-6">
+          <ConditionCheck order={o} />
+        </div>
+      )}
       {show && (
         <div className="mt-6">
           <HandoffCode orderId={o.id} code={o.handoffCode} size="sm" />
@@ -70,17 +107,59 @@ function OrderRow({ o, todayISO }: { o: Order; todayISO: string }) {
   );
 }
 
+function VerificationSteps() {
+  const { level, facts } = useMyVerification();
+  const steps = [
+    { label: "Email verified", done: facts.emailVerified, text: LEVEL_DESCRIPTION.email },
+    { label: "ID verified", done: facts.idVerified, text: LEVEL_DESCRIPTION.id },
+    { label: "Trusted lender", done: level === "trusted", text: LEVEL_DESCRIPTION.trusted },
+  ];
+  const gaps = trustedGap(facts);
+  return (
+    <section aria-labelledby="verif-title" className="border-b border-line py-6">
+      <h2 id="verif-title" className="label">
+        Verification
+      </h2>
+      <ol className="mt-4 grid gap-4 md:grid-cols-3 md:gap-6">
+        {steps.map((st, i) => (
+          <li key={st.label} className={clsx("border-t pt-3", st.done ? "border-navy" : "border-line")}>
+            <p className="flex items-baseline justify-between gap-2">
+              <span className="label">
+                <span className="tabular-nums text-stone-deep">{String(i + 1).padStart(2, "0")} </span>
+                {st.label}
+              </span>
+              <span className={clsx("text-[12px]", st.done ? "text-navy" : "text-stone-deep")}>{st.done ? "Done" : "To do"}</span>
+            </p>
+            <p className="mt-1 text-stone-deep">{st.text}</p>
+          </li>
+        ))}
+      </ol>
+      {!facts.idVerified && (
+        <div className="mt-6 max-w-md">
+          <VerifyPanel needId />
+        </div>
+      )}
+      {facts.idVerified && gaps.length > 0 && (
+        <p className="mt-4 text-stone-deep">To become a trusted lender: {gaps.join(", ").toLowerCase()}.</p>
+      )}
+    </section>
+  );
+}
+
 export function Account() {
   const hydrated = useHydrated();
   const orders = useOrders((s) => s.orders);
+  const listings = useProfile((s) => s.listings);
+  const { level, email: verifiedEmail } = useMyVerification();
   if (!hydrated) return <Container className="h-[60svh]" aria-busy="true" />;
 
   const todayISO = toISODate(today());
-  const upcoming = orders.filter((o) => orderStatus(o, todayISO) !== "returned");
-  const past = orders.filter((o) => orderStatus(o, todayISO) === "returned");
+  const isPast = (o: Order) => ["returned", "cancelled"].includes(orderStatus(o, todayISO));
+  const upcoming = orders.filter((o) => !isPast(o));
+  const past = orders.filter(isPast);
   const latest = orders[0];
-  const name = latest?.name || "Guest";
-  const email = latest?.email;
+  const email = verifiedEmail ?? undefined;
+  const name = latest?.name || (email ? email.split("@")[0] : "Guest");
   const initials = name
     .split(/\s+/)
     .map((p) => p[0])
@@ -105,14 +184,15 @@ export function Account() {
           {initials}
         </div>
         <div>
-          <p className="flex items-center gap-1.5">
+          <p className="flex flex-wrap items-center gap-2">
             <span className="label">{name}</span>
-            {email && <BadgeCheck size={16} strokeWidth={1.5} className="text-navy" role="img" aria-label="Verified NYU student" />}
+            <VerificationBadge level={level} />
           </p>
-          <p className="text-stone-deep">{email ?? "Verify your NYU email at checkout to rent."}</p>
+          <p className="mt-1 text-stone-deep">{email ?? "Verify your NYU email to rent or list."}</p>
           <p className="text-stone-deep">Joined Nov 2026</p>
         </div>
       </section>
+      <VerificationSteps />
       <div className="mt-8">
         <Tabs
           label="Your rentals"
@@ -145,8 +225,28 @@ export function Account() {
             },
             {
               id: "listings",
-              label: "Listings (0)",
-              content: (
+              label: `Listings (${listings.length})`,
+              content: listings.length ? (
+                <div>
+                  <ul className="border-t border-line">
+                    {listings.map((l) => (
+                      <li key={l.id} className="flex flex-wrap items-baseline justify-between gap-3 border-b border-line py-4">
+                        <span className="min-w-0">
+                          <span className="label">{l.name}</span>
+                          <span className="text-stone-deep">
+                            {" "}
+                            · {l.brand} · {l.condition} · {l.photoCount} photos
+                          </span>
+                        </span>
+                        <Tag tone="navy">In review · within 24h</Tag>
+                      </li>
+                    ))}
+                  </ul>
+                  <ButtonLink href="/list-your-gear" variant="outline" className="mt-6">
+                    List another
+                  </ButtonLink>
+                </div>
+              ) : (
                 <div>
                   <p className="max-w-md">You haven&apos;t listed anything. Your skis are in storage 50 weeks a year.</p>
                   <ButtonLink href="/list-your-gear" className="mt-6">

@@ -23,6 +23,8 @@ export type Lender = {
   rentalsCompleted: number;
   responseTime: string;
   verified: true;
+  /** Student ID photo checked by Dibs. Needed to list anything worth $100+. */
+  idVerified: boolean;
   /** "Feb 2025" */
   joined: string;
   avatarInitials: string;

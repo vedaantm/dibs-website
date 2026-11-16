@@ -11,7 +11,7 @@ import { useItemRental } from "./ItemRentalContext";
 
 /** Atticus-style sticky bottom bar on mobile: name + price | SELECT DATES / CALL DIBS — $X. */
 export function MobileBar() {
-  const { item, sel, quote, setSelection, callDibs } = useItemRental();
+  const { item, sel, quote, setSelection, callDibs, underReview } = useItemRental();
   const [open, setOpen] = useState(false);
   const rate = lowestRate(item);
   const ready = Boolean(quote?.ok);
@@ -29,13 +29,14 @@ export function MobileBar() {
           </div>
           <Button
             className="shrink-0"
+            disabled={underReview}
             onClick={() => {
               if (ready) {
                 if (!callDibs()) setOpen(true);
               } else setOpen(true);
             }}
           >
-            {ready ? `Call dibs — ${formatCents(quote!.subtotal)}` : "Select dates"}
+            {underReview ? "Under review" : ready ? `Call dibs — ${formatCents(quote!.subtotal)}` : "Select dates"}
           </Button>
         </div>
       </div>

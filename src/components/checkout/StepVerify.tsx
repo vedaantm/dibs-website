@@ -8,6 +8,7 @@ import { CAMPUS } from "@/data/campus";
 import { digits, formatPhone, validEduEmail } from "@/lib/card";
 import { useReducedMotion } from "@/lib/hooks";
 import { useCheckout } from "@/store/checkout";
+import { useProfile } from "@/store/trust";
 import { IdDropzone } from "./IdDropzone";
 import { OtpInput } from "./OtpInput";
 
@@ -42,6 +43,7 @@ export function StepVerify({ onToast }: { onToast: (m: string) => void }) {
     if (code === DEMO_CODE) {
       setCodeErr(null);
       c.set({ verified: true });
+      useProfile.getState().verifyEmail(c.email);
     } else {
       setCodeErr("That code didn't match.");
       if (!reduced) setShake((s) => s + 1);
@@ -135,7 +137,10 @@ export function StepVerify({ onToast }: { onToast: (m: string) => void }) {
           </Field>
           <div className="flex flex-col gap-2">
             <span className="eyebrow text-ink">Student ID</span>
-            <IdDropzone done={c.idStatus === "skipped"} onFile={() => c.set({ idStatus: "uploaded" })} />
+            <IdDropzone done={c.idStatus === "skipped"} onFile={() => {
+              c.set({ idStatus: "uploaded" });
+              useProfile.getState().verifyId();
+            }} />
             <div className="flex items-center justify-between">
               {errors.id ? (
                 <p role="alert" className="text-[12px] text-vermilion-deep">

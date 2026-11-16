@@ -4,6 +4,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Item, PickupSpotId } from "@/data/types";
 import { getItem } from "@/lib/catalog";
 import type { Quote, Selection } from "@/lib/pricing";
+import { useUnderReview } from "@/components/trust/ReportListing";
 import { useBag } from "@/store/bag";
 import { useUI } from "@/store/ui";
 
@@ -13,6 +14,8 @@ type Ctx = {
   quote: Quote | null;
   spot: PickupSpotId;
   error: string | null;
+  /** 2+ open reports: shown as UNDER REVIEW and can't be booked. */
+  underReview: boolean;
   setSelection: (sel: Selection | null, quote: Quote | null) => void;
   setSpot: (s: PickupSpotId) => void;
   callDibs: () => boolean;
@@ -30,6 +33,7 @@ export function ItemRentalProvider({ slug, children }: { slug: string; children:
   const add = useBag((s) => s.add);
   const openBag = useUI((s) => s.openBag);
   const pulseBag = useUI((s) => s.pulseBag);
+  const underReview = useUnderReview(slug);
 
   const value: Ctx = {
     item,
@@ -37,6 +41,7 @@ export function ItemRentalProvider({ slug, children }: { slug: string; children:
     quote,
     spot,
     error,
+    underReview,
     setSelection: (s, q) => {
       setSel(s);
       setQuote(q);
@@ -44,7 +49,7 @@ export function ItemRentalProvider({ slug, children }: { slug: string; children:
     },
     setSpot,
     callDibs: () => {
-      if (!sel || !quote?.ok) return false;
+      if (underReview || !sel || !quote?.ok) return false;
       const r = add(item.slug, sel, spot);
       if (!r.ok) {
         setError(r.error);

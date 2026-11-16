@@ -36,8 +36,8 @@ export function PickupChoice({ idPrefix = "pickup" }: { idPrefix?: string }) {
 }
 
 export function CallDibsButton({ onDone }: { onDone?: () => void }) {
-  const { quote, callDibs } = useItemRental();
-  const ready = Boolean(quote?.ok);
+  const { quote, callDibs, underReview } = useItemRental();
+  const ready = Boolean(quote?.ok) && !underReview;
   return (
     <Button
       full
@@ -46,7 +46,7 @@ export function CallDibsButton({ onDone }: { onDone?: () => void }) {
         if (callDibs()) onDone?.();
       }}
     >
-      {ready ? `Call dibs — ${formatCents(quote!.subtotal)}` : "Select dates"}
+      {underReview ? "Under review — can't be booked" : ready ? `Call dibs — ${formatCents(quote!.subtotal)}` : "Select dates"}
     </Button>
   );
 }

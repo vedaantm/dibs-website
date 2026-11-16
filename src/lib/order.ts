@@ -1,4 +1,5 @@
 import type { PickupSpotId } from "@/data/types";
+import { stageState, type HandoffChecks } from "./handoff";
 import { orderTotals, type OrderTotals } from "./fees";
 import type { BagLine } from "./bag";
 
@@ -32,7 +33,7 @@ export type OrderLine = {
   dorm?: string;
 };
 
-export type OrderStatus = "confirmed" | "picked-up" | "returned";
+export type OrderStatus = "confirmed" | "picked-up" | "returned" | "cancelled";
 
 export type Order = {
   id: string;
@@ -46,6 +47,12 @@ export type Order = {
   depositHold: number;
   handoffCode: string;
   status: OrderStatus;
+  /** Condition photos and confirmations from both sides, at pickup and return. */
+  checks?: HandoffChecks;
+  /** Set when a "Doesn't match" at pickup cancels the rental. ISO timestamp. */
+  cancelledAt?: string;
+  /** Full refund issued on cancellation, in cents. */
+  refundCents?: number;
 };
 
 const ID_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
@@ -125,9 +132,17 @@ export function orderSpan(o: Pick<Order, "lines">): { start: string; returnBy: s
   return { start: starts[0], returnBy: ends[ends.length - 1] };
 }
 
-/** CONFIRMED before pickup, PICKED UP while out, RETURNED after the last return date. */
-export function orderStatus(o: Pick<Order, "lines">, todayISO: string): OrderStatus {
+/**
+ * CANCELLED after a failed pickup check. Otherwise CONFIRMED before pickup, PICKED UP while out,
+ * RETURNED after the last return date. Condition checks move the status on early: a settled
+ * pickup check means it's out, a settled return check means it's back.
+ */
+export function orderStatus(o: Pick<Order, "lines"> & Partial<Pick<Order, "checks" | "cancelledAt">>, todayISO: string): OrderStatus {
+  if (o.cancelledAt) return "cancelled";
+  const ret = stageState(o.checks?.return);
+  if (ret === "matched" || ret === "mismatch") return "returned";
   const { start, returnBy } = orderSpan(o);
+  if (stageState(o.checks?.pickup) === "matched" && todayISO <= returnBy) return "picked-up";
   if (todayISO < start) return "confirmed";
   if (todayISO <= returnBy) return "picked-up";
   return "returned";
@@ -137,4 +152,5 @@ export const STATUS_LABEL: Record<OrderStatus, string> = {
   confirmed: "Confirmed",
   "picked-up": "Picked up",
   returned: "Returned",
+  cancelled: "Cancelled · refunded",
 };

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Gallery } from "@/components/item/Gallery";
-import { ItemAccordions, LenderCard, Reviews, TrustRow } from "@/components/item/ItemDetails";
+import { ItemAccordions, LenderCard, TrustRow } from "@/components/item/ItemDetails";
 import { ItemHeader } from "@/components/item/ItemHeader";
 import { ItemRentalProvider } from "@/components/item/ItemRentalContext";
 import { MobileBar } from "@/components/item/MobileBar";
 import { RentalPanel } from "@/components/item/RentalPanel";
 import { ProductGrid } from "@/components/product/ProductGrid";
+import { ItemReviews } from "@/components/trust/ItemReviews";
+import { ReportListing, UnderReviewNotice } from "@/components/trust/ReportListing";
 import { Container } from "@/components/ui/Container";
 import { ITEMS } from "@/data/items";
 import { getItem, getLender, getLenderItems, getRelated, lowestRate } from "@/lib/catalog";
@@ -78,11 +80,13 @@ export default async function ItemPage({ params }: PageProps<"/item/[slug]">) {
           <div className="flex flex-col gap-7 px-4 pb-10 pt-6 md:px-6 lg:px-12 lg:pb-16 lg:pt-6">
             <ItemHeader item={item} />
             <div className="h-px bg-line" />
+            <UnderReviewNotice slug={item.slug} />
             <RentalPanel />
-            <TrustRow item={item} />
+            <TrustRow item={item} lender={lender} />
             <LenderCard lender={lender} />
-            <Reviews item={item} />
+            <ItemReviews slug={item.slug} seed={item.reviews} />
             <ItemAccordions item={item} />
+            <ReportListing slug={item.slug} name={`${item.brand} ${item.name}`} />
           </div>
         </div>
       </div>

@@ -15,6 +15,8 @@ import {
 import { getItem } from "@/lib/catalog";
 import { toISODate } from "@/lib/dates";
 import type { Selection } from "@/lib/pricing";
+import { UNDER_REVIEW_ERROR } from "@/lib/trust";
+import { listingUnderReview } from "./trust";
 
 export type { BagLine } from "@/lib/bag";
 
@@ -43,6 +45,7 @@ export const useBag = create<BagState>()(
       add: (slug, sel, pickupSpotId) => {
         const item = getItem(slug);
         if (!item) return { ok: false, error: "That item is no longer listed." };
+        if (listingUnderReview(slug)) return { ok: false, error: UNDER_REVIEW_ERROR };
         const quote = quoteLine(item, sel);
         if (!quote.ok) return { ok: false, error: quote.error ?? "Those dates don't work." };
         if (findOverlap(get().lines, slug, sel)) return { ok: false, error: OVERLAP_ERROR };

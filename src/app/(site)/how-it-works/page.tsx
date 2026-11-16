@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Faq, StepList } from "@/components/content/Faq";
 import { PickupPoints } from "@/components/home/PickupPoints";
 import { ButtonLink } from "@/components/ui/Button";
@@ -90,7 +91,10 @@ export default function HowItWorksPage() {
             <h3 className="label">Verification</h3>
             <p className="mt-2 max-w-md">
               Every renter and lender verifies an @{CAMPUS.emailDomain} email with a one-time code, plus a photo of their student ID.
-              The ID photo is checked once and never shown to the other person.
+              The ID photo is checked once and never shown to the other person.{" "}
+              <Link href="/standards#verification" className="underline underline-offset-4 hover:no-underline">
+                Verification levels
+              </Link>
             </p>
           </div>
         </div>
